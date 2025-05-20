@@ -1,0 +1,9 @@
+openai
+pyautogen
+matplotlib
+yfinance
+pandas
+numpy
+ipykernel
+jupyter
+tqdm
