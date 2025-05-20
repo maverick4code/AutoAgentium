@@ -4,70 +4,80 @@ Welcome to **AutoAgentium**, my personal portfolio for building AI-powered multi
 
 ---
 
-## 🔧 Subprojects
+## 🛠️ Mini Projects
 
-### 1. CodeAutomator
+### 1. Multi-Agent Conversation(Comedy Duo)
 
-**Pattern:** Two‑Agent Code Flow
+**Pattern:** Here, I have taken a Two‑Comedian to chat.
 
-- Code Writer generates clean Python scripts.
+* **Actors:** Cathy & Joe, each a `ConversableAgent` with custom system prompts.
+* **Flow:** Joe kicks off with a punchline; Cathy builds on it. They riff back and forth until one says, “I gotta go.”
+* **Key features:**
 
-- Executor runs those scripts locally and returns results.
+  * `max_turns` control 
+  * They exchange jokes, remembering punchlines and building off each other's humor.
+  * Termination is dynamic: they stop when one says "I gotta go."
+  * Tracks full conversation history, token usage, and allows you to generate summary reflections.
+    
+---
 
-- Demo: Fetched YTD(Year to Date) gains for NVDA & TSLA, plot with Matplotlib.
+### 2. Sequential Chats and Customer Onboarding
+
+**Pattern:** Step‑by‑Step Chat Pipeline
+
+* **Use case:** Customer onboarding or ETL pipelines.
+* **How it works:** Chain agents in a fixed WelcomeAgent → order—Greeter → DataCollector → Verifier, passing summaries or reflections as context.
+* **Benefits:**
+
+  * Modular design: Add or reorder steps by editing a list.
+  * Flexible summaries: Quick carryover vs. thoughtful LLM reflections.
 
 ---
 
-### 2. SequentialChain
-
-**Pattern:** Step‑by‑Step Chat
-
-Sometimes you need a clear sequence: “First fetch the data, then clean it, then visualize it.” **SequentialChain** does exactly that. I wired up agents so each one waits for the previous to finish before jumping in.
-
-- Agents tackle subtasks in sequence.
-  
-- Adapted for customer service bots handling one query at a time.
- 
-**Use case:** Works for onboarding bots and multi‑stage data pipelines. 
-
----
-
-### 3. NestedSquad
+### 3. Reflection and Blogpost Writing
 
 **Pattern:** Nested Chat Teams
 
-In **NestedSquad**, a “manager” agent builds up a mini squad—each member with its own role and oversees their conversation.
-
-**Use case:** I tested this by having the manager coordinate a mini newsroom: one agent researched topics, another drafted paragraphs, and a third did quick fact‑checks. It felt like running a tiny editorial team entirely within a chat session.
-
----
-
-### 4. ToolboxFree
-
-**Pattern:** Function Mode vs. Free‑form Code
-
-Here I explored two styles:
-
-* **Function Mode:** Agents call your pre‑written helper functions (e.g: `get_stock_data()` or `plot_chart()`). It makes scripts concise and predictable.
-* **Free‑form Mode:** Agents are free to invent any code they need, loading libraries and writing new functions in the session.
-
-**Lesson learned:** Function Mode gives you more control and safety, while Free‑form Mode unlocks maximum creativity.
+* **Manager agent** spawns a mini‑team on demand.
+* **Example:** A news micro‑team with research, drafting, and fact‑checking agents—all coordinated in one chat.
+* **Use case:** Collaborative writing, turn‑based games or dynamic task delegation.
 
 ---
 
-### 5. StockPulseReport
+### 4. ChessMaster(Chess Game between 2 AI Agents)
 
-**Pattern:** Group‑Chat Planning
+**Pattern:** Tool-enabled agents with nested chats
 
-Here, I assembled a squad of five agents—**Planner**, **Engineer**, **Executor**, **Writer**, and **Admin** and tasked them with generating a full stock‑performance report:
+* **Agents:** White & Black players using GPT-4 Turbo.
+* **Tool:** `BoardProxy` executes `get_legal_moves()` and `make_move()` with python-chess.
+* **Flow:** Player asks for moves, proxy returns legal UCI options, player chooses and proxy confirms.
 
-1. **Planner** breaks down “generate stock report” into steps.
-2. **Engineer** wrote the Python code to crunch the data.
-3. **Executor** ran the code and handed back charts and tables.
-4. **Writer** added it all into a polished Markdown report.
-5. **Admin** checked in at each milestone, asking for human approval when needed.
+- **Why it's cool:** Combines strategy, tool use, and turn-based coordination inside a conversational loop.
 
-Output:  A full stock report—completely automated.
+---
+
+### 5. Coding and Financial Analysis
+
+**Pattern:** Code generation + execution loop
+
+* **Roles:** Code Writer drafts Python scripts; Executor runs them locally.
+* **Demo task:** Fetch YTD(Year to Date) gains for NVDA/TSLA with `yfinance` and plot via `matplotlib`.
+
+---
+
+### 6. Stock Report Generation
+
+**Pattern:** Group chat with planning and role distribution
+
+* **Team:** Planner → Engineer → Executor → Writer → Admin.
+* **Workflow:**
+
+  1. **Planner:** Breaks down tasks: fetch, analyze, draft.
+  2. **Engineer:** Writes the python code for each subtask.
+  3. **Executor:** Runs that code and returns visuals, stats, etc.
+  4. **Writer:** Drafts the final Markdown report
+  5. **Admin:** checks progress, requests human approvals.
+* **Outcome:**  A complete stock report, with data pulled, charts generated, and blog written—all through agent interaction.
 
 ---
 
